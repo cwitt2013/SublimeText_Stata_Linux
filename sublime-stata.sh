@@ -26,7 +26,7 @@ xte 'keydown Control_L' 'key 1' 'key A' 'usleep 100' 'key BackSpace' 'usleep 100
 sleep .1
 # Enter do command
 setxkbmap de
-string="do $1/sublime2stata.do"
+string='do ''"'$1'/sublime2stata.do''"'
 xdotool type --delay 1 "${string}"
 sleep .1
 # Execute

@@ -39,8 +39,7 @@ if sublime.platform() == "linux":
         st_name = "Sublime Text"
     else:
         st_name = "Sublime Text 2"
-
-    cmd = "sh ~/.config/sublime-text-3/Packages/SublimeStataEnhanced/sublime-stata.sh" + " " + filepath
+cmd = "sh ~/.config/sublime-text-3/Packages/SublimeStataEnhanced/sublime-stata.sh" + " " + '"' + filepath + '"'
     os.system(cmd)
     os.remove(dofile_path)
 ```
