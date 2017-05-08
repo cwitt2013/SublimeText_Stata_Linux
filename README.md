@@ -20,7 +20,8 @@ Edit the file 'sublime-stata.sh' if necessary to choose your version of Stata (t
 
 6.) Edit Stata.sublime-build ('.config/sublime-text-3/Packages/SublimeStataEnhanced') and replace the content with
 
-```{ "cmd": ["sh DIR/sublime-stata.sh $file"], "file_regex": "^(...*?):([0-9]*):?([0-9]*)", "selector": "source.stata", "shell": true, }
+```
+{ "cmd": ["sh DIR/sublime-stata.sh $file"], "file_regex": "^(...*?):([0-9]*):?([0-9]*)", "selector": "source.stata", "shell": true, }
 ```
 
 If everything is working correctly you should be able to run complete 'do-files' using the shortcut "Ctrl + b".
