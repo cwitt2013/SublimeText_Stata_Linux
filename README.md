@@ -6,19 +6,24 @@ This is my first version (08 May 2017) and still work in progress. I will give y
 
 1.) You will need to install Sublime Text.
 
-2.) You will need the following Linux packages: wmctrl, xdotool, xautomation
+2.) You will need the following Linux packages: wmctrl, xdotool, xclip, xautomation
 
 3.) Install the Package Stata Enhanced (https://packagecontrol.io/packages/Stata%20Enhanced).
 
 4.) You should place a symbolic link of your stata executives (e.g. /usr/local/stata14/xstata-se) in '/usr/local/bin'.
 
-5.) Edit Stata.sublime-build ('.config/sublime-text-3/Packages/SublimeStataEnhanced') and replace the content with
+5.) Download the file 'sublime-stata.sh' and place it anywhere you want. My recommendation is to place it into '~/.config/sublime-text-3/Packages/SublimeStataEnhanced'. 
 
-``{ "cmd": ["xstata-se do $file"], "file_regex": "^(...*?):([0-9]*):?([0-9]*)", "selector": "source.stata", "shell": true, }``
+In what follow the path to this file is called DIR.
 
-If you use an other flavor of Stata you will need to replace 'xstata-se' with your flavor. If everything is working correctly you should be able to run complete 'do-files' using the shortcut "Ctrl + b".
+Edit the file 'sublime-stata.sh' if necessary to choose your version of Stata (to do this you will have to replace the code on line 13 and 16).
 
-6.) Download the file 'sublime-stata.sh' and place it anywhere you want. My recommendation is to place it into '.config/sublime-text-3/Packages/SublimeStataEnhanced'.
+6.) Edit Stata.sublime-build ('.config/sublime-text-3/Packages/SublimeStataEnhanced') and replace the content with
+
+```{ "cmd": ["sh DIR/sublime-stata.sh $file"], "file_regex": "^(...*?):([0-9]*):?([0-9]*)", "selector": "source.stata", "shell": true, }
+```
+
+If everything is working correctly you should be able to run complete 'do-files' using the shortcut "Ctrl + b".
 
 7.) Now you will need to edit the file 'text_2_stata.py'. Paste the following code into the function 'text_2_stataCommand' after ``switch_focus = ""``:
 
@@ -39,12 +44,11 @@ if sublime.platform() == "linux":
         st_name = "Sublime Text"
     else:
         st_name = "Sublime Text 2"
-cmd = "sh ~/.config/sublime-text-3/Packages/SublimeStataEnhanced/sublime-stata.sh" + " " + '"' + filepath + '"'
+
+    cmd = "sh DIR/sublime-stata.sh" + " " + '"' + dofile_path + '"'
     os.system(cmd)
     os.remove(dofile_path)
 ```
-Replace the filepath in 'cmd' with the path to your 'sublime-stata.sh'. Edit the file 'sublime-stata.sh' if necessary to choose your version of Stata (replace the code on line 13 and 16).
-
 8.) Edit your key bindings in Sublime Text and add the following between the brackets:
 
 ```
@@ -55,9 +59,9 @@ Replace the filepath in 'cmd' with the path to your 'sublime-stata.sh'. Edit the
   },
 ```
 
-Now you should be able to run the selected code with "Ctrl + D"
+Now you should be able to run the selected code with "Ctrl + D". The current line will be send if no code is selected.
 
 
-Hope this works... Please let me know if you have any questions or recommendations for improvement.
+I hope this works... Please let me know if you have any questions or recommendations for improvement.
 
 
